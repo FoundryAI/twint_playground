@@ -13,20 +13,31 @@ def main():
     username = settings['username']
     search = settings['search']
     timestamp = datetime.now().strftime("%Y%m%d%H%M")
-    output = timestamp + SEPARATOR + username
-
-    if search:
-        output = output + SEPARATOR + search.replace(' ', SEPARATOR)
+    output = 'data/' + timestamp + SEPARATOR + username
 
     # Configure
     config = twint.Config()
     config.Username = username
-    config.Search = search
     config.Store_csv = True
-    config.Output = f"data/{output}.csv"
+    config.Hide_output = True
 
     # Run
-    twint.run.Search(config)
+    if search == 'profile':
+        config.Output = f"{output}_profile.csv"
+        twint.run.Profile(config)
+
+    elif search == 'followers':
+        config.Output = f"{output}_followers.csv"
+        twint.run.Followers(config)
+
+    elif search == 'following':
+        config.Output = f"{output}_following.csv"
+        twint.run.Following(config)
+
+    else:
+        config.Search = search
+        config.Output = f"{output}_{search.replace(' ', SEPARATOR)}.csv"
+        twint.run.Search(config)
 
 
 if __name__ == '__main__':

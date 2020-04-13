@@ -6,4 +6,4 @@
 * run `make run`
 
 ## Resources
-* twint [github](https://github.com/twintproject/twint)
+* twint [github](https://github.com/twintproject/twint), [wiki](https://github.com/twintproject/twint/wiki)
