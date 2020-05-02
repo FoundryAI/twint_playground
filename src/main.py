@@ -11,7 +11,7 @@ def main():
     # Import settings
     settings = safe_load(open('config/parameters.yml').read())
     username = settings['username']
-    search = settings['search']
+    search = settings['search'] or ''
     timestamp = datetime.now().strftime("%Y%m%d%H%M")
     output = 'data/' + timestamp + SEPARATOR + username
 
@@ -20,6 +20,7 @@ def main():
     config.Username = username
     config.Store_csv = True
     config.Hide_output = True
+    config.Resume = f"data/{username}.log"
 
     # Run
     if search == 'profile':
